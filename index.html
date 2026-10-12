@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6f1">
+  <meta name="description" content="서서울웍스는 소프트웨어와 출판을 통해 아이디어를 쓰임 있는 경험과 콘텐츠로 만듭니다.">
+  <title>서서울웍스 | 기술과 콘텐츠를 만듭니다</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f6f1;
+      --ink: #18201d;
+      --muted: #606a64;
+      --line: #d8ddd5;
+      --green: #c9f36a;
+      --blue: #dce9e5;
+      --orange: #ec7957;
+      --serif: "Noto Serif KR", Georgia, serif;
+      --sans: "Noto Sans KR", "Malgun Gothic", sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+    .shell { width: min(1200px, calc(100% - 64px)); margin-inline: auto; }
+
+    .site-header {
+      position: absolute;
+      z-index: 5;
+      inset: 0 0 auto;
+      color: #fff;
+    }
+    .header-inner {
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgb(255 255 255 / 24%);
+    }
+    .wordmark {
+      color: inherit;
+      text-decoration: none;
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .wordmark span { color: var(--green); }
+    .site-nav { display: flex; align-items: center; gap: 36px; }
+    .site-nav a {
+      color: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 160ms ease;
+    }
+    .site-nav a:hover { color: var(--green); }
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgb(255 255 255 / 45%);
+      background: transparent;
+      color: #fff;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 690px;
+      height: min(790px, 88svh);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: #27332e url("https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=2200&q=85") center 48% / cover no-repeat;
+      color: #fff;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgb(13 24 20 / 79%) 0%, rgb(13 24 20 / 54%) 48%, rgb(13 24 20 / 12%) 100%);
+    }
+    .hero-content { position: relative; z-index: 1; padding-top: 72px; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 23px;
+      color: var(--green);
+      font-family: "DM Sans", var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 30px; height: 1px; background: currentColor; content: ""; }
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(56px, 8vw, 100px);
+      font-weight: 600;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .hero-copy {
+      max-width: 590px;
+      margin: 26px 0 0;
+      color: rgb(255 255 255 / 86%);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+    .button-primary { background: var(--green); color: var(--ink); }
+    .button-primary:hover { background: #dcff91; }
+    .button-quiet { border-color: rgb(255 255 255 / 55%); color: #fff; }
+    .button-quiet:hover { border-color: #fff; background: rgb(255 255 255 / 12%); }
+    .button-arrow { font-family: "DM Sans", sans-serif; font-size: 19px; line-height: 1; }
+    .hero-index {
+      position: absolute;
+      right: max(32px, calc((100vw - 1200px) / 2));
+      bottom: 36px;
+      z-index: 1;
+      color: rgb(255 255 255 / 78%);
+      font-family: "DM Sans", sans-serif;
+      font-size: 12px;
+    }
+
+    .intro { padding: 105px 0 112px; }
+    .intro-grid { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 80px; align-items: start; }
+    .section-label {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-family: "DM Sans", var(--sans);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .intro h2, .about h2 {
+      max-width: 770px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+    .intro h2 em { color: #557263; font-style: normal; }
+    .intro-note { max-width: 620px; margin: 23px 0 0; color: var(--muted); font-size: 16px; }
+
+    .business { border-top: 1px solid var(--line); }
+    .business-heading { display: flex; justify-content: space-between; align-items: end; padding: 44px 0 25px; }
+    .business-heading h2, .updates h2, .contact h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(32px, 4.2vw, 52px);
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+    .business-heading p { max-width: 380px; margin: 0; color: var(--muted); font-size: 14px; }
+    .business-row {
+      display: grid;
+      grid-template-columns: 90px minmax(220px, 0.75fr) 1fr 44px;
+      gap: 30px;
+      align-items: center;
+      min-height: 215px;
+      border-top: 1px solid var(--line);
+    }
+    .business-row:last-child { border-bottom: 1px solid var(--line); }
+    .business-number { align-self: start; padding-top: 40px; color: #78827b; font: 600 13px "DM Sans", sans-serif; }
+    .business-title { margin: 0; font-family: var(--serif); font-size: 31px; font-weight: 600; line-height: 1.4; }
+    .business-title small { display: block; margin-top: 3px; color: #748078; font: 600 12px "DM Sans", var(--sans); }
+    .business-desc { max-width: 485px; margin: 0; color: var(--muted); font-size: 15px; }
+    .business-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      font: 20px "DM Sans", sans-serif;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+    .business-row:hover .business-mark { border-color: var(--green); background: var(--green); }
+
+    .about { margin-top: 120px; background: var(--blue); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; min-height: 390px; padding-block: 72px; }
+    .about-visual {
+      min-height: 250px;
+      position: relative;
+      overflow: hidden;
+      background: #c2d2cc url("https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1200&q=80") center 54% / cover no-repeat;
+    }
+    .about-visual::after { position: absolute; inset: 0; background: linear-gradient(140deg, rgb(24 32 29 / 4%), rgb(24 32 29 / 24%)); content: ""; }
+    .about-copy .section-label { margin: 0 0 15px; }
+    .about h2 { font-size: clamp(29px, 3.2vw, 40px); }
+    .about-copy p:last-child { max-width: 500px; margin: 18px 0 0; color: #4f6159; font-size: 15px; }
+
+    .updates { padding: 98px 0 105px; }
+    .updates-head { display: flex; justify-content: space-between; align-items: end; padding-bottom: 28px; }
+    .updates-head p { margin: 0; color: var(--muted); font-size: 14px; }
+    .update-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 30px;
+      gap: 24px;
+      align-items: center;
+      min-height: 76px;
+      border-top: 1px solid var(--line);
+    }
+    .update-row:last-child { border-bottom: 1px solid var(--line); }
+    .update-type { color: #61746a; font-size: 12px; font-weight: 700; }
+    .update-title { margin: 0; font-size: 15px; font-weight: 600; }
+    .update-date { color: var(--muted); font: 12px "DM Sans", var(--sans); }
+
+    .contact { background: var(--ink); color: #fff; }
+    .contact-inner { display: grid; grid-template-columns: 1fr 0.7fr; gap: 60px; align-items: end; padding-block: 76px 80px; }
+    .contact .section-label { margin: 0 0 15px; color: var(--green); }
+    .contact h2 { max-width: 620px; }
+    .contact-lead { margin: 15px 0 0; color: rgb(255 255 255 / 69%); font-size: 15px; }
+    .contact-details { border-top: 1px solid rgb(255 255 255 / 30%); }
+    .contact-line { display: flex; justify-content: space-between; gap: 20px; padding: 13px 0; border-bottom: 1px solid rgb(255 255 255 / 22%); font-size: 13px; }
+    .contact-line dt { color: rgb(255 255 255 / 62%); }
+    .contact-line dd { margin: 0; text-align: right; }
+    .contact-line a { text-decoration-color: rgb(255 255 255 / 45%); text-underline-offset: 4px; }
+    .contact-placeholder { color: #f4cc80; }
+
+    .site-footer { background: #111815; color: rgb(255 255 255 / 65%); }
+    .footer-inner { display: flex; justify-content: space-between; gap: 40px; align-items: center; min-height: 102px; }
+    .footer-brand { color: #fff; font-size: 15px; font-weight: 700; }
+    .footer-meta { margin: 5px 0 0; font-size: 11px; }
+    .copyright { margin: 0; font: 11px "DM Sans", var(--sans); }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 40px, 560px); }
+      .header-inner { min-height: 72px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .site-nav {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 20px 18px;
+        background: #18201d;
+      }
+      .site-nav.is-open { display: flex; }
+      .site-nav a { padding: 13px 0; border-bottom: 1px solid rgb(255 255 255 / 15%); }
+      .hero { min-height: 680px; height: 84svh; max-height: 790px; background-position: 57% center; }
+      .hero::before { background: linear-gradient(90deg, rgb(13 24 20 / 76%), rgb(13 24 20 / 34%)); }
+      .hero-content { padding-top: 55px; }
+      h1 { font-size: clamp(54px, 15vw, 76px); }
+      .hero-copy { max-width: 420px; font-size: 16px; }
+      .hero-index { right: 20px; bottom: 24px; }
+      .intro { padding: 76px 0 80px; }
+      .intro-grid { grid-template-columns: 1fr; gap: 22px; }
+      .intro h2 { font-size: 34px; }
+      .business-heading { display: block; padding-top: 33px; }
+      .business-heading p { margin-top: 12px; }
+      .business-row { grid-template-columns: 38px 1fr 38px; gap: 14px; min-height: 0; padding: 28px 0; }
+      .business-number { padding-top: 6px; }
+      .business-title { font-size: 25px; }
+      .business-desc { grid-column: 2; grid-row: 2; font-size: 14px; }
+      .business-mark { grid-column: 3; grid-row: 1; width: 36px; height: 36px; }
+      .about { margin-top: 82px; }
+      .about-inner { grid-template-columns: 1fr; gap: 30px; padding-block: 40px; }
+      .about-visual { min-height: 215px; }
+      .updates { padding: 73px 0 80px; }
+      .updates-head { display: block; }
+      .updates-head p { margin-top: 8px; }
+      .update-row { grid-template-columns: 90px 1fr; gap: 12px; min-height: 82px; }
+      .update-date { grid-column: 2; grid-row: 2; margin-top: -15px; }
+      .update-title { align-self: end; font-size: 14px; }
+      .update-row > span:last-child { display: none; }
+      .contact-inner { grid-template-columns: 1fr; gap: 30px; padding-block: 58px; }
+      .footer-inner { display: block; padding-block: 24px; }
+      .copyright { margin-top: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="#home" aria-label="서서울웍스 홈">서서울<span>웍스</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="메뉴 열기">☰</button>
+      <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
+        <a href="#business">사업 분야</a>
+        <a href="#about">회사 소개</a>
+        <a href="#updates">소식</a>
+        <a href="#contact">문의</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="shell hero-content">
+        <p class="eyebrow">Software · Publishing</p>
+        <h1 id="hero-title">서서울웍스</h1>
+        <p class="hero-copy">기술과 콘텐츠로 아이디어를 구체화하고,<br>더 많은 사람에게 닿는 경험을 만듭니다.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#business">사업 분야 보기 <span class="button-arrow" aria-hidden="true">↘</span></a>
+          <a class="button button-quiet" href="#contact">문의하기 <span class="button-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <span class="hero-index" aria-hidden="true">SEOSEOUL WORKS · 01 / 04</span>
+    </section>
+
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="shell intro-grid">
+        <p class="section-label">A little about us</p>
+        <div>
+          <h2 id="intro-title">좋은 생각이 <em>쓸모 있는 결과</em>가 되도록.</h2>
+          <p class="intro-note">서서울웍스는 소프트웨어와 출판을 통해 아이디어를 서비스와 콘텐츠로 발전시킵니다. 필요한 문제를 살피고, 오래 쓰이고 읽히는 결과를 고민합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="business" id="business" aria-labelledby="business-title">
+      <div class="shell">
+        <div class="business-heading">
+          <h2 id="business-title">사업 분야</h2>
+          <p>소프트웨어와 출판, 두 분야에서 아이디어를 현실로 이어갑니다.</p>
+        </div>
+        <article class="business-row">
+          <span class="business-number">01</span>
+          <h3 class="business-title">소프트웨어<small>SOFTWARE</small></h3>
+          <p class="business-desc">사용자의 필요와 현장의 문제를 살펴 소프트웨어를 기획하고 개발합니다. 제품과 서비스에 관한 자세한 내용은 준비되는 대로 소개하겠습니다.</p>
+          <span class="business-mark" aria-hidden="true">↗</span>
+        </article>
+        <article class="business-row">
+          <span class="business-number">02</span>
+          <h3 class="business-title">출판<small>PUBLISHING</small></h3>
+          <p class="business-desc">읽을 가치가 있는 지식과 이야기를 콘텐츠로 만듭니다. 출판 분야와 발행 콘텐츠를 차근차근 소개하겠습니다.</p>
+          <span class="business-mark" aria-hidden="true">↗</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="shell about-inner">
+        <div class="about-visual" role="img" aria-label="책과 노트가 놓인 작업 공간"></div>
+        <div class="about-copy">
+          <p class="section-label">About Seoseoul Works</p>
+          <h2 id="about-title">만드는 일과 전하는 일,<br>그 사이를 잇습니다.</h2>
+          <p>서서울웍스는 소프트웨어 개발·공급과 출판 사업을 운영합니다. 기술의 쓰임과 콘텐츠의 전달 방식을 고민하며, 각 분야의 프로젝트와 소식을 이곳에 기록합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="updates" id="updates" aria-labelledby="updates-title">
+      <div class="shell">
+        <div class="updates-head">
+          <h2 id="updates-title">새로운 소식</h2>
+          <p>서서울웍스의 소식과 업데이트를 전합니다.</p>
+        </div>
+        <div class="update-row">
+          <span class="update-type">NOTICE</span>
+          <p class="update-title">새로운 소식을 준비하고 있습니다.</p>
+          <time class="update-date" datetime="2026">2026</time>
+          <span aria-hidden="true">↗</span>
+        </div>
+        <div class="update-row">
+          <span class="update-type">JOURNAL</span>
+          <p class="update-title">사업과 출판 관련 소식이 이곳에 게시됩니다.</p>
+          <time class="update-date" datetime="2026">2026</time>
+          <span aria-hidden="true">↗</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="shell contact-inner">
+        <div>
+          <p class="section-label">Get in touch</p>
+          <h2 id="contact-title">함께할 이야기가<br>있으신가요?</h2>
+          <p class="contact-lead">사업 제휴와 소프트웨어·출판 관련 문의를 기다립니다.</p>
+        </div>
+        <dl class="contact-details">
+          <div class="contact-line"><dt>이메일</dt><dd class="contact-placeholder">게시 전 이메일 주소 입력</dd></div>
+          <div class="contact-line"><dt>전화</dt><dd class="contact-placeholder">게시 전 전화번호 입력</dd></div>
+          <div class="contact-line"><dt>주소</dt><dd class="contact-placeholder">게시 전 사업장 주소 입력</dd></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div>
+        <div class="footer-brand">서서울웍스</div>
+        <p class="footer-meta">사업자 정보와 연락처를 실제 정보로 입력한 뒤 게시해 주세요.</p>
+      </div>
+      <p class="copyright">© <span id="current-year">2026</span> SEOSEOUL WORKS. ALL RIGHTS RESERVED.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const navigation = document.querySelector(".site-nav");
+
+    menuButton.addEventListener("click", () => {
+      const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isExpanded));
+      menuButton.setAttribute("aria-label", isExpanded ? "메뉴 열기" : "메뉴 닫기");
+      navigation.classList.toggle("is-open", !isExpanded);
+    });
+
+    navigation.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "메뉴 열기");
+        navigation.classList.remove("is-open");
+      }
+    });
+
+    document.querySelector("#current-year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
