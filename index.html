@@ -6,9 +6,27 @@
   <meta name="theme-color" content="#f5f6f1">
   <meta name="description" content="서서울웍스는 소프트웨어와 출판을 통해 아이디어를 쓰임 있는 경험과 콘텐츠로 만듭니다.">
   <title>서서울웍스 | 기술과 콘텐츠를 만듭니다</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700;800&family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="canonical" href="https://seoseoulworks.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="서서울웍스">
+  <meta property="og:title" content="서서울웍스 | 기술과 콘텐츠를 만듭니다">
+  <meta property="og:description" content="서서울웍스는 소프트웨어와 출판을 통해 아이디어를 서비스와 콘텐츠로 발전시킵니다.">
+  <meta property="og:url" content="https://seoseoulworks.com/">
+  <meta property="og:image" content="https://seoseoulworks.com/assets/images/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="서서울웍스 — 소프트웨어와 출판. 기술과 콘텐츠를 만듭니다.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="서서울웍스 | 기술과 콘텐츠를 만듭니다">
+  <meta name="twitter:description" content="서서울웍스는 소프트웨어와 출판을 통해 아이디어를 서비스와 콘텐츠로 발전시킵니다.">
+  <meta name="twitter:image" content="https://seoseoulworks.com/assets/images/og-image.png">
+  <meta name="twitter:image:alt" content="서서울웍스 — 소프트웨어와 출판. 기술과 콘텐츠를 만듭니다.">
+  <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link href="assets/fonts/fonts.css" rel="stylesheet">
   <style>
     :root {
       color-scheme: light;
@@ -87,7 +105,7 @@
       align-items: center;
       position: relative;
       overflow: hidden;
-      background: #27332e url("https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=2200&q=85") center 48% / cover no-repeat;
+      background: #27332e url("assets/images/hero.jpg") center 48% / cover no-repeat;
       color: #fff;
     }
     .hero::before {
@@ -220,7 +238,7 @@
       min-height: 250px;
       position: relative;
       overflow: hidden;
-      background: #c2d2cc url("https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1200&q=80") center 54% / cover no-repeat;
+      background: #c2d2cc url("assets/images/about.jpg") center 54% / cover no-repeat;
     }
     .about-visual::after { position: absolute; inset: 0; background: linear-gradient(140deg, rgb(24 32 29 / 4%), rgb(24 32 29 / 24%)); content: ""; }
     .about-copy .section-label { margin: 0 0 15px; }
@@ -232,7 +250,7 @@
     .updates-head p { margin: 0; color: var(--muted); font-size: 14px; }
     .update-row {
       display: grid;
-      grid-template-columns: 150px 1fr 30px;
+      grid-template-columns: 150px minmax(0, 1fr) auto 30px;
       gap: 24px;
       align-items: center;
       min-height: 76px;
@@ -341,7 +359,7 @@
           <a class="button button-quiet" href="#contact">문의하기 <span class="button-arrow" aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <span class="hero-index" aria-hidden="true">SEOSEOUL WORKS · 01 / 04</span>
+      <span class="hero-index" aria-hidden="true">SEOSEOUL WORKS</span>
     </section>
 
     <section class="intro" aria-labelledby="intro-title">
